@@ -23,3 +23,6 @@ html
 
 # vs
 .vs/*
+
+# traning model
+best_model.pkl

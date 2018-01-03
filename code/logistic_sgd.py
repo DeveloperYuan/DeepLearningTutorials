@@ -453,7 +453,7 @@ def predict():
     """
 
     # load the saved model
-    classifier = pickle.load(open('best_model.pkl'))
+    classifier = pickle.load(open('best_model.pkl', 'rb'))
 
     # compile a predictor function
     predict_model = theano.function(
@@ -467,9 +467,18 @@ def predict():
     test_set_x = test_set_x.get_value()
 
     predicted_values = predict_model(test_set_x[:10])
+
+    import matplotlib.pyplot as plt 
+    plt.imshow(test_set_x[:10].reshape([28*10,28]), cmap='gray')
+    plt.show()
+
     print("Predicted values for the first 10 examples in test set:")
     print(predicted_values)
+
+    print("Real values for the first 10 examples in test set:")
+    print(test_set_y[:10].eval())
 
 
 if __name__ == '__main__':
     sgd_optimization_mnist()
+    predict()
